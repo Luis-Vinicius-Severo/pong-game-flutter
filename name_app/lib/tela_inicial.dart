@@ -1,0 +1,94 @@
+import 'package:flutter/material.dart';
+import 'package:name_app/tela_game.dart';
+
+class TelaInicial extends StatelessWidget {
+  const TelaInicial({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset('assets/imagens/fundo.png', fit: BoxFit.cover),
+          Positioned(
+            top: 20,
+            right: 20,
+            child: GestureDetector(
+              onTap: () {
+                print("configuração ativada");
+              },
+              child: Image.asset(
+                'assets/imagens/configuracao.png',
+                width: 50,
+                height: 70,
+              ),
+            ),
+          ),
+          Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset('assets/imagens/Line.png'),
+                    SizedBox(width: 30),
+                    Text(
+                      "Pong",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 80,
+                        fontFamily: "Grenze",
+                        fontWeight: FontWeight.bold,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 6,
+                            color: Colors.black,
+                            offset: Offset(2, 2),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 30),
+                    Image.asset('assets/imagens/Line.png'),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        print("rank ativado");
+                      },
+                      child: Image.asset(
+                        'assets/imagens/rank.png',
+                        width: 150,
+                        height: 80,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TelaGame(),
+                          ),
+                        );
+                      },
+                      child: Image.asset(
+                        'assets/imagens/play.png',
+                        width: 150,
+                        height: 130,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
