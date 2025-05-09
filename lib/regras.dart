@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class NovaTela extends StatelessWidget {
-  const NovaTela({super.key});
+class Regras extends StatelessWidget {
+  const Regras({super.key});
 
   @override
   Widget build(BuildContext context) {

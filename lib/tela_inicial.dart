@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:name_app/regras.dart';
-import 'package:name_app/tela_inicial.dart';
+import 'package:name_app/rank.dart';
+import 'package:name_app/tela_game.dart';
 
-class TelaGame extends StatelessWidget {
-  const TelaGame({super.key});
+class TelaInicial extends StatelessWidget {
+  const TelaInicial({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +33,8 @@ class TelaGame extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    Image.asset('assets/imagens/Line.png'),
+                    SizedBox(width: 30),
                     Text(
                       "Pong",
                       style: TextStyle(
@@ -49,29 +51,10 @@ class TelaGame extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(width: 30),
+                    Image.asset('assets/imagens/Line.png'),
                   ],
                 ),
-
-                Center(
-                  child: SizedBox(
-                    width: 300, // largura do card
-                    child: Card(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          TextField(
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
-                              hintText: "Nome do usuário",
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -79,13 +62,11 @@ class TelaGame extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => const TelaInicial(),
-                          ),
+                          MaterialPageRoute(builder: (context) => const Rank()),
                         );
                       },
                       child: Image.asset(
-                        'assets/imagens/retornar.png',
+                        'assets/imagens/rank.png',
                         width: 150,
                         height: 80,
                       ),
@@ -95,7 +76,7 @@ class TelaGame extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const NovaTela(),
+                            builder: (context) => const TelaGame(),
                           ),
                         );
                       },
