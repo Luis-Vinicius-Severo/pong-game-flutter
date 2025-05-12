@@ -24,7 +24,7 @@ class Rank extends StatelessWidget {
               child: Image.asset(
                 'assets/imagens/retornar.png',
                 width: 50,
-                height: 70,
+                height: 90,
               ),
             ),
           ),
@@ -39,13 +39,6 @@ class Rank extends StatelessWidget {
                   fontSize: 80,
                   fontFamily: "Grenze",
                   fontWeight: FontWeight.bold,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 6,
-                      color: Colors.black,
-                      offset: Offset(2, 2),
-                    ),
-                  ],
                 ),
               ),
             ),
@@ -54,81 +47,149 @@ class Rank extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
-                  width: 300,
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          prefixIcon: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Player 1",
-                              style: TextStyle(fontSize: 20),
+                SizedBox(height: 60),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/imagens/medalhaOuro.png',
+                      width: 70,
+                      height: 70,
+                    ),
+
+                    // Margem externa do input
+                    Padding(
+                      padding: EdgeInsets.only(
+                        right: 60,
+                      ), // aqui define a margem externa do lado esquerdo
+                      child: SizedBox(
+                        width: 300,
+                        child: Card(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0,
+                            ), // padding interno
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                prefixIcon: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Player 1",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                                suffixIcon: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    "20",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                          suffixIcon: Align(
-                            alignment: Alignment.centerRight,
-                            child: Text("20", style: TextStyle(fontSize: 20)),
-                          ),
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     ),
-                  ),
+                  ],
                 ),
-                SizedBox(height: 20), // Espaço entre os campos
-                SizedBox(
-                  width: 300,
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          prefixIcon: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Player 2",
-                              style: TextStyle(fontSize: 20),
+
+                SizedBox(height: 10),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/imagens/medalhaPrata.png',
+                      width: 70,
+                      height: 70,
+                    ),
+
+                    // Margem externa do input
+                    Padding(
+                      padding: EdgeInsets.only(
+                        right: 60,
+                      ), // aqui define a margem externa do lado esquerdo
+                      child: SizedBox(
+                        width: 300,
+                        child: Card(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0,
+                            ), // padding interno
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                prefixIcon: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Player 2",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                                suffixIcon: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    "20",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                          suffixIcon: Align(
-                            alignment: Alignment.centerRight,
-                            child: Text("20", style: TextStyle(fontSize: 20)),
-                          ),
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     ),
-                  ),
+                  ],
                 ),
-                SizedBox(height: 20), // Espaço entre os campos
-                SizedBox(
-                  width: 300,
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          prefixIcon: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Player 3",
-                              style: TextStyle(fontSize: 20),
+
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/imagens/medalhaBronze.png',
+                      width: 70,
+                      height: 70,
+                    ),
+
+                    // Margem externa do input
+                    Padding(
+                      padding: EdgeInsets.only(
+                        right: 60,
+                      ), // aqui define a margem externa do lado esquerdo
+                      child: SizedBox(
+                        width: 300,
+                        child: Card(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0,
+                            ), // padding interno
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                prefixIcon: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Player 3",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                                suffixIcon: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    "20",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                          suffixIcon: Align(
-                            alignment: Alignment.centerRight,
-                            child: Text("20", style: TextStyle(fontSize: 20)),
-                          ),
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
