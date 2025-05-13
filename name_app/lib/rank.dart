@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:name_app/tela_inicial.dart';
 
+const Color customBlue = Color(0xFF3A3E71);
+
 class Rank extends StatelessWidget {
   const Rank({super.key});
 
@@ -59,16 +61,14 @@ class Rank extends StatelessWidget {
 
                     // Margem externa do input
                     Padding(
-                      padding: EdgeInsets.only(
-                        right: 60,
-                      ), // aqui define a margem externa do lado esquerdo
+                      padding: EdgeInsets.only(right: 60),
                       child: SizedBox(
                         width: 300,
                         child: Card(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 10.0,
-                            ), // padding interno
+                            ),
                             child: TextField(
                               decoration: InputDecoration(
                                 border: InputBorder.none,
@@ -106,18 +106,15 @@ class Rank extends StatelessWidget {
                       height: 70,
                     ),
 
-                    // Margem externa do input
                     Padding(
-                      padding: EdgeInsets.only(
-                        right: 60,
-                      ), // aqui define a margem externa do lado esquerdo
+                      padding: EdgeInsets.only(right: 60),
                       child: SizedBox(
                         width: 300,
                         child: Card(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                            ), // padding interno
+                              horizontal: 10.0,
+                            ),
                             child: TextField(
                               decoration: InputDecoration(
                                 border: InputBorder.none,
@@ -156,16 +153,14 @@ class Rank extends StatelessWidget {
 
                     // Margem externa do input
                     Padding(
-                      padding: EdgeInsets.only(
-                        right: 60,
-                      ), // aqui define a margem externa do lado esquerdo
+                      padding: EdgeInsets.only(right: 60),
                       child: SizedBox(
                         width: 300,
                         child: Card(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                            ), // padding interno
+                              horizontal: 10.0,
+                            ),
                             child: TextField(
                               decoration: InputDecoration(
                                 border: InputBorder.none,

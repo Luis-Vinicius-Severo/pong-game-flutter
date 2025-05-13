@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:name_app/configuracao.dart';
 import 'package:name_app/rank.dart';
 import 'package:name_app/tela_game.dart';
 
@@ -13,16 +14,20 @@ class TelaInicial extends StatelessWidget {
         children: [
           Image.asset('assets/imagens/fundo.png', fit: BoxFit.cover),
           Positioned(
-            top: 20,
-            right: 20,
+            top: 38,
+            right: 30,
             child: GestureDetector(
               onTap: () {
-                print("configuração ativada");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Configuracao()),
+                );
               },
               child: Image.asset(
                 'assets/imagens/configuracao.png',
                 width: 50,
-                height: 70,
+                height: 50,
+                fit: BoxFit.contain,
               ),
             ),
           ),
