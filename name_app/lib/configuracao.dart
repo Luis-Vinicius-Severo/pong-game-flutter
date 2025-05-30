@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:name_app/regras.dart';
 import 'package:name_app/tela_inicial.dart';
 
 class Configuracao extends StatefulWidget {
@@ -52,92 +53,94 @@ class _ConfiguracaoState extends State<Configuracao> {
                 ),
                 const SizedBox(height: 60),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                // Agrupamento de Áudio, Música e SFX
+                Column(
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start, // alinha tudo à esquerda
                   children: [
-                    const Text(
-                      "Audio",
-                      style: TextStyle(color: Colors.white, fontSize: 30),
-                      textAlign: TextAlign.right,
+                    // Áudio + Slider
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          "Áudio",
+                          style: TextStyle(color: Colors.white, fontSize: 30),
+                        ),
+                        const SizedBox(width: 20),
+                        SizedBox(
+                          width: 250,
+                          child: Slider(
+                            value: volume,
+                            onChanged: (value) {
+                              setState(() {
+                                volume = value;
+                              });
+                            },
+                            activeColor: Colors.white,
+                            inactiveColor: Colors.white38,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(),
-                    SizedBox(
-                      width: 250,
-                      child: Slider(
-                        value: volume,
-                        onChanged: (value) {
-                          setState(() {
-                            volume = value;
-                          });
-                        },
-                        activeColor: Colors.white,
-                        inactiveColor: Colors.white38,
-                      ),
+
+                    const SizedBox(height: 10),
+
+                    // Música
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          "Música",
+                          style: TextStyle(color: Colors.white, fontSize: 25),
+                        ),
+                        const SizedBox(width: 10),
+                        Checkbox(
+                          value: musica,
+                          onChanged: (value) {
+                            setState(() {
+                              musica = value!;
+                            });
+                          },
+                          checkColor: Colors.white,
+                          activeColor: Colors.transparent,
+                          side: const BorderSide(color: Colors.white),
+                        ),
+                      ],
+                    ),
+
+                    // SFX
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          "SFX",
+                          style: TextStyle(color: Colors.white, fontSize: 25),
+                        ),
+                        const SizedBox(width: 10),
+                        Checkbox(
+                          value: sfx,
+                          onChanged: (value) {
+                            setState(() {
+                              sfx = value!;
+                            });
+                          },
+                          checkColor: Colors.white,
+                          activeColor: Colors.transparent,
+                          side: const BorderSide(color: Colors.white),
+                        ),
+                      ],
                     ),
                   ],
                 ),
 
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 290,
-                  ), // ajusta aqui o quanto quiser deslocar
-                  child: Row(
-                    children: [
-                      const Text(
-                        "Musica",
-                        style: TextStyle(color: Colors.white, fontSize: 30),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ), // espaço entre o texto e o checkbox
-                      Checkbox(
-                        value: musica,
-                        onChanged: (value) {
-                          setState(() {
-                            musica = value!;
-                          });
-                        },
-                        checkColor: Colors.white,
-                        activeColor: Colors.transparent,
-                        side: const BorderSide(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 290),
-                  child: Row(
-                    children: [
-                      const Text(
-                        "SFX",
-                        style: TextStyle(color: Colors.white, fontSize: 25),
-                      ),
-                      const SizedBox(width: 10),
-                      Checkbox(
-                        value: sfx,
-                        onChanged: (value) {
-                          setState(() {
-                            sfx = value!;
-                          });
-                        },
-                        checkColor: Colors.white,
-                        activeColor: Colors.transparent,
-                        side: const BorderSide(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-
                 const SizedBox(height: 40),
 
-                // BOTÃO "REGRAS"
+                // Botão Regras
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const TelaInicial(),
-                      ),
+                      MaterialPageRoute(builder: (context) => const Regras()),
                     );
                   },
                   child: const Text(
