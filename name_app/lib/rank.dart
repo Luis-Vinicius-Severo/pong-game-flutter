@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:name_app/tela_inicial.dart';
 
 const Color customBlue = Color(0xFF3A3E71);
@@ -36,10 +37,9 @@ class Rank extends StatelessWidget {
               padding: const EdgeInsets.only(),
               child: Text(
                 "Rank",
-                style: TextStyle(
+                style: GoogleFonts.grenze(
                   color: Colors.white,
-                  fontSize: 80,
-                  fontFamily: "Grenze",
+                  fontSize: 100,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -76,14 +76,17 @@ class Rank extends StatelessWidget {
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     "Player 1",
-                                    style: TextStyle(fontSize: 20),
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                                 suffixIcon: Align(
                                   alignment: Alignment.centerRight,
                                   child: Text(
                                     "20",
-                                    style: TextStyle(fontSize: 20),
+                                    style: GoogleFonts.grenze(fontSize: 25),
                                   ),
                                 ),
                               ),
@@ -122,14 +125,17 @@ class Rank extends StatelessWidget {
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     "Player 2",
-                                    style: TextStyle(fontSize: 20),
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                                 suffixIcon: Align(
                                   alignment: Alignment.centerRight,
                                   child: Text(
                                     "20",
-                                    style: TextStyle(fontSize: 20),
+                                    style: GoogleFonts.grenze(fontSize: 25),
                                   ),
                                 ),
                               ),
@@ -168,14 +174,17 @@ class Rank extends StatelessWidget {
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     "Player 3",
-                                    style: TextStyle(fontSize: 20),
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                                 suffixIcon: Align(
                                   alignment: Alignment.centerRight,
                                   child: Text(
                                     "20",
-                                    style: TextStyle(fontSize: 20),
+                                    style: GoogleFonts.grenze(fontSize: 25),
                                   ),
                                 ),
                               ),

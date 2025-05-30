@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:name_app/configuracao.dart';
 import 'package:name_app/regras.dart';
 import 'package:name_app/tela_inicial.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TelaGame extends StatelessWidget {
   const TelaGame({super.key});
@@ -40,10 +41,9 @@ class TelaGame extends StatelessWidget {
                   children: [
                     Text(
                       "Pong",
-                      style: TextStyle(
+                      style: GoogleFonts.grenze(
                         color: Colors.white,
-                        fontSize: 80,
-                        fontFamily: "Grenze",
+                        fontSize: 100,
                         fontWeight: FontWeight.bold,
                         shadows: [
                           Shadow(
@@ -59,13 +59,17 @@ class TelaGame extends StatelessWidget {
 
                 Center(
                   child: SizedBox(
-                    width: 300, // largura do card
+                    width: 300,
                     child: Card(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           TextField(
                             textAlign: TextAlign.center,
+                            style: GoogleFonts.grenze(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
                             decoration: InputDecoration(
                               hintText: "Nome do usuário",
                               border: InputBorder.none,

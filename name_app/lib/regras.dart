@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Regras extends StatelessWidget {
   const Regras({super.key});
@@ -20,10 +21,9 @@ class Regras extends StatelessWidget {
                 padding: const EdgeInsets.only(),
                 child: Text(
                   "Regras",
-                  style: TextStyle(
+                  style: GoogleFonts.grenze(
                     color: Colors.white,
                     fontSize: 80,
-                    fontFamily: "Grenze",
                     fontWeight: FontWeight.bold,
                     shadows: [
                       Shadow(
@@ -43,12 +43,11 @@ class Regras extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Text(
-                      "Progressão de Nível\nCada vez que você completa uma meta no jogo, o nível aumenta.",
+                      "Progressão de Nível :\nCada vez que você completa uma meta no jogo, o nível aumenta.",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: GoogleFonts.grenze(
                         color: Colors.white,
-                        fontSize: 24,
-                        fontFamily: "Grenze",
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                         shadows: [
                           Shadow(
@@ -69,12 +68,11 @@ class Regras extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            "Condição de Vitória\nFaça 20 pontos e você vence a máquina!",
+                            "Condição de Vitória :\nFaça 20 pontos e você vence a máquina!",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: GoogleFonts.grenze(
                               color: Colors.white,
-                              fontSize: 20,
-                              fontFamily: "Grenze",
+                              fontSize: 25,
                               fontWeight: FontWeight.bold,
                               shadows: [
                                 Shadow(
@@ -89,12 +87,11 @@ class Regras extends StatelessWidget {
                         SizedBox(width: 30),
                         Expanded(
                           child: Text(
-                            "Velocidade da Bola\nA bola acelera conforme avança de fase.",
+                            "Velocidade da Bola :\nA bola acelera conforme avança de fase.",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: GoogleFonts.grenze(
                               color: Colors.white,
-                              fontSize: 20,
-                              fontFamily: "Grenze",
+                              fontSize: 25,
                               fontWeight: FontWeight.bold,
                               shadows: [
                                 Shadow(

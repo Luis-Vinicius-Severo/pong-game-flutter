@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:name_app/configuracao.dart';
 import 'package:name_app/rank.dart';
 import 'package:name_app/tela_game.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TelaInicial extends StatelessWidget {
   const TelaInicial({super.key});
@@ -42,10 +43,9 @@ class TelaInicial extends StatelessWidget {
                     SizedBox(width: 30),
                     Text(
                       "Pong",
-                      style: TextStyle(
+                      style: GoogleFonts.grenze(
                         color: Colors.white,
-                        fontSize: 80,
-                        fontFamily: "Grenze",
+                        fontSize: 100,
                         fontWeight: FontWeight.bold,
                         shadows: [
                           Shadow(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:name_app/regras.dart';
 import 'package:name_app/tela_inicial.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Configuracao extends StatefulWidget {
   const Configuracao({super.key});
@@ -42,29 +43,28 @@ class _ConfiguracaoState extends State<Configuracao> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
+                Text(
                   "Configuração",
-                  style: TextStyle(
+                  style: GoogleFonts.grenze(
                     color: Colors.white,
-                    fontSize: 60,
-                    fontFamily: "Grenze",
+                    fontSize: 80,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 60),
 
-                // Agrupamento de Áudio, Música e SFX
                 Column(
-                  crossAxisAlignment:
-                      CrossAxisAlignment.start, // alinha tudo à esquerda
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Áudio + Slider
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text(
+                        Text(
                           "Áudio",
-                          style: TextStyle(color: Colors.white, fontSize: 30),
+                          style: GoogleFonts.grenze(
+                            fontSize: 35,
+                            color: Colors.white,
+                          ),
                         ),
                         const SizedBox(width: 20),
                         SizedBox(
@@ -89,9 +89,12 @@ class _ConfiguracaoState extends State<Configuracao> {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text(
+                        Text(
                           "Música",
-                          style: TextStyle(color: Colors.white, fontSize: 25),
+                          style: GoogleFonts.grenze(
+                            fontSize: 35,
+                            color: Colors.white,
+                          ),
                         ),
                         const SizedBox(width: 10),
                         Checkbox(
@@ -112,9 +115,12 @@ class _ConfiguracaoState extends State<Configuracao> {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text(
+                        Text(
                           "SFX",
-                          style: TextStyle(color: Colors.white, fontSize: 25),
+                          style: GoogleFonts.grenze(
+                            fontSize: 35,
+                            color: Colors.white,
+                          ),
                         ),
                         const SizedBox(width: 10),
                         Checkbox(
@@ -133,7 +139,7 @@ class _ConfiguracaoState extends State<Configuracao> {
                   ],
                 ),
 
-                const SizedBox(height: 40),
+                const SizedBox(height: 20),
 
                 // Botão Regras
                 GestureDetector(
@@ -143,9 +149,12 @@ class _ConfiguracaoState extends State<Configuracao> {
                       MaterialPageRoute(builder: (context) => const Regras()),
                     );
                   },
-                  child: const Text(
+                  child: Text(
                     "Regras",
-                    style: TextStyle(color: Colors.white, fontSize: 25),
+                    style: GoogleFonts.grenze(
+                      fontSize: 35,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],
