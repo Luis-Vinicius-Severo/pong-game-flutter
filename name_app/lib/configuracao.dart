@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:name_app/regras.dart';
 import 'package:name_app/tela_inicial.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:name_app/tela_regras.dart';
 
 class Configuracao extends StatefulWidget {
   const Configuracao({super.key});
@@ -146,7 +146,9 @@ class _ConfiguracaoState extends State<Configuracao> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Regras()),
+                      MaterialPageRoute(
+                        builder: (context) => const TelaRegras(),
+                      ),
                     );
                   },
                   child: Text(

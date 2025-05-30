@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:name_app/tela_pong.dart';
 
-class Regras extends StatelessWidget {
-  const Regras({super.key});
+class TelaRegras extends StatelessWidget {
+  const TelaRegras({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const PongGame()),
-          );
+          Navigator.pop(context);
         },
         child: Stack(
           fit: StackFit.expand,
