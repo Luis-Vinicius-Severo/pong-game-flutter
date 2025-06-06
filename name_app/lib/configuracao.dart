@@ -139,8 +139,6 @@ class _ConfiguracaoState extends State<Configuracao> {
                   ],
                 ),
 
-                const SizedBox(height: 20),
-
                 // Botão Regras
                 GestureDetector(
                   onTap: () {

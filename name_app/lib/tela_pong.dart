@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:name_app/tela_inicial.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,37 +12,9 @@ void main() {
     DeviceOrientation.landscapeRight,
   ]).then((_) {
     runApp(
-      const MaterialApp(debugShowCheckedModeBanner: false, home: HomePage()),
+      const MaterialApp(debugShowCheckedModeBanner: false, home: PongGame()),
     );
   });
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
-            textStyle: const TextStyle(fontSize: 24),
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const PongGame()),
-            );
-          },
-          child: const Text('Jogar Pong'),
-        ),
-      ),
-    );
-  }
 }
 
 class PongGame extends StatefulWidget {
@@ -210,6 +184,8 @@ class _PongGameState extends State<PongGame> {
               },
             ),
           ),
+
+          // Botão de pausa
           Positioned(
             top: 20,
             right: 20,
@@ -226,6 +202,68 @@ class _PongGameState extends State<PongGame> {
               },
             ),
           ),
+
+          // Tela de pausa
+          if (isPaused)
+            Container(
+              color: Colors.black.withOpacity(0.6),
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "PAUSADO",
+                      style: GoogleFonts.grenze(
+                        color: Colors.white,
+                        fontSize: 90,
+                        fontWeight: FontWeight.bold,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 6,
+                            color: Colors.black,
+                            offset: Offset(2, 2),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const TelaInicial(),
+                              ),
+                            );
+                          },
+                          child: Image.asset(
+                            'assets/imagens/retornar.png',
+                            width: 70,
+                            height: 70,
+                          ),
+                        ),
+                        const SizedBox(width: 30),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isPaused = false; // Continua o jogo
+                            });
+                          },
+                          child: Image.asset(
+                            'assets/imagens/play.png',
+                            width: 70,
+                            height: 70,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
         ],
       ),
     );
