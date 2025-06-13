@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:name_app/rank.dart';
 import 'package:name_app/tela_inicial.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -47,6 +48,7 @@ class _PongGameState extends State<PongGame> {
   late Timer gameLoop;
   bool isPaused = false;
   bool isBallMoving = false;
+  bool isGameOver = false;
 
   @override
   void initState() {
@@ -98,6 +100,12 @@ class _PongGameState extends State<PongGame> {
 
       if (ballX < 0) {
         aiScore++;
+        if (aiScore >= 3) {
+          setState(() {
+            isGameOver = true;
+            isPaused = false;
+          });
+        }
         resetBall();
       }
 
@@ -202,6 +210,22 @@ class _PongGameState extends State<PongGame> {
               },
             ),
           ),
+
+          // Tela de perdeu
+          if (isGameOver)
+            Positioned.fill(
+              child: GameOverScreen(
+                onRestart: () {
+                  setState(() {
+                    aiScore = 0;
+                    playerScore = 0;
+                    isPaused = false;
+                    isGameOver = false;
+                    resetBall();
+                  });
+                },
+              ),
+            ),
 
           // Tela de pausa
           if (isPaused)
@@ -356,4 +380,74 @@ class PongPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+}
+
+class GameOverScreen extends StatelessWidget {
+  final VoidCallback onRestart;
+
+  const GameOverScreen({super.key, required this.onRestart});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.black.withOpacity(0.6),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "FIM DE JOGO",
+              style: GoogleFonts.grenze(
+                color: Colors.white,
+                fontSize: 80,
+                fontWeight: FontWeight.bold,
+                shadows: [
+                  Shadow(
+                    blurRadius: 6,
+                    color: Colors.black,
+                    offset: Offset(2, 2),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TelaInicial(),
+                      ),
+                    );
+                  },
+                  child: Image.asset(
+                    'assets/imagens/retornar.png',
+                    width: 70,
+                    height: 70,
+                  ),
+                ),
+                const SizedBox(width: 30),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Rank()),
+                    );
+                  },
+                  child: Image.asset(
+                    'assets/imagens/rank.png',
+                    width: 70,
+                    height: 70,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

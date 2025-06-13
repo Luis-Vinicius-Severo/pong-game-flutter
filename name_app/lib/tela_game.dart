@@ -4,8 +4,37 @@ import 'package:name_app/regras.dart';
 import 'package:name_app/tela_inicial.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TelaGame extends StatelessWidget {
+class TelaGame extends StatefulWidget {
   const TelaGame({super.key});
+
+  @override
+  State<TelaGame> createState() => _TelaGameState();
+}
+
+class _TelaGameState extends State<TelaGame> {
+  final TextEditingController _controller = TextEditingController();
+  bool _isValid = true;
+
+  void _verificarENavegar() {
+    if (_controller.text.trim().isEmpty) {
+      setState(() {
+        _isValid = false;
+      });
+    } else {
+      setState(() {
+        _isValid = true;
+      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Regras()),
+      ).then((_) {
+        _controller.clear();
+        setState(() {
+          _isValid = true;
+        });
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +85,6 @@ class TelaGame extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 Center(
                   child: SizedBox(
                     width: 300,
@@ -65,6 +93,7 @@ class TelaGame extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           TextField(
+                            controller: _controller,
                             textAlign: TextAlign.center,
                             style: GoogleFonts.grenze(
                               fontSize: 25,
@@ -73,6 +102,21 @@ class TelaGame extends StatelessWidget {
                             decoration: InputDecoration(
                               hintText: "Nome do usuário",
                               border: InputBorder.none,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:
+                                      _isValid
+                                          ? Colors.transparent
+                                          : Colors.red,
+                                  width: 4,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: _isValid ? Colors.blue : Colors.red,
+                                  width: 4,
+                                ),
+                              ),
                             ),
                           ),
                         ],
@@ -80,7 +124,6 @@ class TelaGame extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -91,7 +134,12 @@ class TelaGame extends StatelessWidget {
                           MaterialPageRoute(
                             builder: (context) => const TelaInicial(),
                           ),
-                        );
+                        ).then((_) {
+                          _controller.clear();
+                          setState(() {
+                            _isValid = true;
+                          });
+                        });
                       },
                       child: Image.asset(
                         'assets/imagens/retornar.png',
@@ -100,14 +148,7 @@ class TelaGame extends StatelessWidget {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Regras(),
-                          ),
-                        );
-                      },
+                      onTap: _verificarENavegar,
                       child: Image.asset(
                         'assets/imagens/play.png',
                         width: 150,
