@@ -68,7 +68,7 @@ class TelaRegras extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            "Condição de Vitória :\nFaça 20 pontos e você vence a máquina!",
+                            "Condição de Vitória :\n Não existe, apenas sobreviva!",
                             textAlign: TextAlign.center,
                             style: GoogleFonts.grenze(
                               color: Colors.white,
@@ -87,7 +87,7 @@ class TelaRegras extends StatelessWidget {
                         SizedBox(width: 30),
                         Expanded(
                           child: Text(
-                            "Velocidade da Bola :\nA bola acelera conforme avança de fase.",
+                            "Condição de Derrota :\nSe tomar 3 pontos, você perde e o jogo reinicia desde o começo..",
                             textAlign: TextAlign.center,
                             style: GoogleFonts.grenze(
                               color: Colors.white,

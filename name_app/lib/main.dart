@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:name_app/tela_inicial.dart'; // sua outra tela
+import 'package:name_app/tela_inicial.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
