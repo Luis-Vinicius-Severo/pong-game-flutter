@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:name_app/rank.dart';
-import 'package:name_app/tela_inicial.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:name_app/tela_inicial.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,20 +34,20 @@ class _PongGameState extends State<PongGame> {
   double ballSize = 12;
 
   double playerY = 0;
-  double iaY = 0;
+  double aiY = 0;
 
-  double bolaX = 0;
-  double bolaY = 0;
-  double velocidadeBolaX = 5;
-  double velocidadeBolaY = 5;
-  double ballacel = 0.5;
+  double ballX = 0;
+  double ballY = 0;
+  double ballSpeedX = 5;
+  double ballSpeedY = 5;
+  double ballAcceleration = 0.5;
 
-  int playerPontuacao = 0;
-  int pontoIA = 0;
+  int playerScore = 0;
+  int aiScore = 0;
 
   late Timer gameLoop;
-  bool isPause = false;
-  bool bolaMovendo = false;
+  bool isPaused = false;
+  bool isBallMoving = false;
   bool isGameOver = false;
 
   @override
@@ -61,12 +61,11 @@ class _PongGameState extends State<PongGame> {
     screenHeight = MediaQuery.of(context).size.height;
 
     playerY = screenHeight / 2 - paddleHeight / 2;
-    iaY = screenHeight / 2 - paddleHeight / 2;
-    bolaX = screenWidth / 2;
-    bolaY = screenHeight / 2;
+    aiY = screenHeight / 2 - paddleHeight / 2;
+    resetBall();
 
-    gameLoop = Timer.periodic(const Duration(milliseconds: 16), (timer) {
-      if (!isPause) {
+    gameLoop = Timer.periodic(const Duration(milliseconds: 16), (_) {
+      if (!isPaused && !isGameOver) {
         updateBall();
         updateAI();
       }
@@ -74,77 +73,76 @@ class _PongGameState extends State<PongGame> {
   }
 
   void updateBall() {
-    if (!bolaMovendo) return;
+    if (!isBallMoving) return;
 
     setState(() {
-      bolaX += velocidadeBolaX;
-      bolaY += velocidadeBolaY;
+      ballX += ballSpeedX;
+      ballY += ballSpeedY;
 
-      if (bolaY <= 0 || bolaY + ballSize >= screenHeight) {
-        velocidadeBolaY = -velocidadeBolaY;
+      if (ballY <= 0 || ballY + ballSize >= screenHeight) {
+        ballSpeedY = -ballSpeedY;
       }
 
-      if (bolaX <= paddleWidth &&
-          bolaY + ballSize >= playerY &&
-          bolaY <= playerY + paddleHeight) {
-        velocidadeBolaX = -(velocidadeBolaX.abs() + ballacel);
+      if (ballX <= paddleWidth &&
+          ballY + ballSize >= playerY &&
+          ballY <= playerY + paddleHeight) {
+        ballSpeedX = ballSpeedX + ballAcceleration;
+        ballSpeedX = -ballSpeedX;
       }
 
-      if (bolaX + ballSize >= screenWidth - paddleWidth &&
-          bolaY + ballSize >= iaY &&
-          bolaY <= iaY + paddleHeight) {
-        velocidadeBolaX = -(velocidadeBolaX.abs() + ballacel);
+      if (ballX + ballSize >= screenWidth - paddleWidth &&
+          ballY + ballSize >= aiY &&
+          ballY <= aiY + paddleHeight) {
+        ballSpeedX = ballSpeedX + ballAcceleration;
+        ballSpeedX = -ballSpeedX;
       }
 
-      if (bolaX < 0) {
-        pontoIA++;
-        if (pontoIA >= 3) {
-          setState(() {
-            isGameOver = true;
-            isPause = false;
-          });
+      if (ballX < 0) {
+        aiScore++;
+        if (aiScore >= 3) {
+          isGameOver = true;
+          isPaused = false;
         }
-        resetaBola();
+        resetBall();
       }
-
-      if (bolaX > screenWidth) {
-        playerPontuacao++;
-        resetaBola();
+      if (ballX > screenWidth) {
+        playerScore++;
+        resetBall();
       }
     });
   }
 
   void updateAI() {
     final random = Random();
-    int maxScore = max(playerPontuacao, pontoIA);
+    int maxScore = max(playerScore, aiScore);
     double aiSpeed = 3 + (maxScore * 0.5);
     double errorRange = (15 - maxScore * 1.5).clamp(3, 15);
     double error = random.nextDouble() * errorRange * 2 - errorRange;
 
-    if (velocidadeBolaX > 0) {
-      double aiCenter = iaY + paddleHeight / 2 + error;
-      if (aiCenter < bolaY) {
-        iaY += aiSpeed;
-      } else if (aiCenter > bolaY) {
-        iaY -= aiSpeed;
+    if (ballSpeedX > 0) {
+      double aiCenter = aiY + paddleHeight / 2 + error;
+      if (aiCenter < ballY) {
+        aiY += aiSpeed;
+      } else if (aiCenter > ballY) {
+        aiY -= aiSpeed;
       }
-      iaY = iaY.clamp(0, screenHeight - paddleHeight);
+      aiY = aiY.clamp(0, screenHeight - paddleHeight);
     } else {
-      iaY += ((screenHeight / 2 - paddleHeight / 2) - iaY) * 0.05;
+      aiY += ((screenHeight / 2 - paddleHeight / 2) - aiY) * 0.05;
     }
   }
 
-  void resetaBola() {
-    bolaX = screenWidth / 2;
-    bolaY = screenHeight / 2;
-    bolaMovendo = false;
+  void resetBall() {
+    ballX = screenWidth / 2;
+    ballY = screenHeight / 2;
+    isBallMoving = false;
   }
 
   void startBallMovement() {
     final random = Random();
-    velocidadeBolaX = random.nextBool() ? 5 : -5;
-    velocidadeBolaY = random.nextBool() ? 5 : -5;
-    bolaMovendo = true;
+    ballSpeedX = random.nextBool() ? 5 : -5;
+    ballSpeedY = random.nextBool() ? 5 : -5;
+    isBallMoving = true;
   }
 
   @override
@@ -167,7 +165,7 @@ class _PongGameState extends State<PongGame> {
               });
             },
             onTap: () {
-              if (!bolaMovendo && !isPause) {
+              if (!isBallMoving && !isPaused) {
                 startBallMovement();
               }
             },
@@ -177,11 +175,11 @@ class _PongGameState extends State<PongGame> {
                   size: Size(constraints.maxWidth, constraints.maxHeight),
                   painter: PongPainter(
                     playerY,
-                    iaY,
-                    bolaX,
-                    bolaY,
-                    playerPontuacao,
-                    pontoIA,
+                    aiY,
+                    ballX,
+                    ballY,
+                    playerScore,
+                    aiScore,
                     paddleWidth,
                     paddleHeight,
                     ballSize,
@@ -191,42 +189,26 @@ class _PongGameState extends State<PongGame> {
             ),
           ),
 
-          // Botão de pausa
+          // Pause button
           Positioned(
             top: 20,
             right: 20,
             child: IconButton(
               icon: Icon(
-                isPause ? Icons.play_arrow : Icons.pause,
+                isPaused ? Icons.play_arrow : Icons.pause,
                 color: Colors.white,
                 size: 32,
               ),
               onPressed: () {
                 setState(() {
-                  isPause = !isPause;
+                  isPaused = !isPaused;
                 });
               },
             ),
           ),
 
-          // Tela de perdeu
-          if (isGameOver)
-            Positioned.fill(
-              child: GameOverScreen(
-                onRestart: () {
-                  setState(() {
-                    pontoIA = 0;
-                    playerPontuacao = 0;
-                    isPause = false;
-                    isGameOver = false;
-                    resetaBola();
-                  });
-                },
-              ),
-            ),
-
-          // Tela de pausa
-          if (isPause)
+          // Pause
+          if (isPaused)
             Container(
               color: Colors.black.withOpacity(0.6),
               child: Center(
@@ -234,7 +216,7 @@ class _PongGameState extends State<PongGame> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "PAUSADO",
+                      "PAUSED",
                       style: GoogleFonts.grenze(
                         color: Colors.white,
                         fontSize: 90,
@@ -253,14 +235,13 @@ class _PongGameState extends State<PongGame> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const TelaInicial(),
+                          onTap:
+                              () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const TelaInicial(),
+                                ),
                               ),
-                            );
-                          },
                           child: Image.asset(
                             'assets/imagens/retornar.png',
                             width: 70,
@@ -269,11 +250,7 @@ class _PongGameState extends State<PongGame> {
                         ),
                         const SizedBox(width: 30),
                         GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isPause = false; // Continua o jogo
-                            });
-                          },
+                          onTap: () => setState(() => isPaused = false),
                           child: Image.asset(
                             'assets/imagens/play.png',
                             width: 70,
@@ -286,6 +263,22 @@ class _PongGameState extends State<PongGame> {
                 ),
               ),
             ),
+
+          // Game Over
+          if (isGameOver)
+            Positioned.fill(
+              child: GameOverScreen(
+                onRestart: () {
+                  setState(() {
+                    playerScore = 0;
+                    aiScore = 0;
+                    isPaused = false;
+                    isGameOver = false;
+                    resetBall();
+                  });
+                },
+              ),
+            ),
         ],
       ),
     );
@@ -293,23 +286,16 @@ class _PongGameState extends State<PongGame> {
 }
 
 class PongPainter extends CustomPainter {
-  final double playerY;
-  final double iaY;
-  final double bolaX;
-  final double bolaY;
-  final int playerPontuacao;
-  final int pontoIA;
-  final double paddleWidth;
-  final double paddleHeight;
-  final double ballSize;
+  final double playerY, aiY, ballX, ballY, paddleWidth, paddleHeight, ballSize;
+  final int playerScore, aiScore;
 
   PongPainter(
     this.playerY,
-    this.iaY,
-    this.bolaX,
-    this.bolaY,
-    this.playerPontuacao,
-    this.pontoIA,
+    this.aiY,
+    this.ballX,
+    this.ballY,
+    this.playerScore,
+    this.aiScore,
     this.paddleWidth,
     this.paddleHeight,
     this.ballSize,
@@ -344,35 +330,33 @@ class PongPainter extends CustomPainter {
 
     paint.color = Colors.grey.shade900;
     canvas.drawRect(
-      Rect.fromLTWH(size.width - paddleWidth, iaY, paddleWidth, paddleHeight),
+      Rect.fromLTWH(size.width - paddleWidth, aiY, paddleWidth, paddleHeight),
       paint,
     );
 
     paint.color = Colors.grey.shade300;
-    canvas.drawRect(Rect.fromLTWH(bolaX, bolaY, ballSize, ballSize), paint);
+    canvas.drawRect(Rect.fromLTWH(ballX, ballY, ballSize, ballSize), paint);
 
-    final textStylePlayer = TextStyle(
+    final textStylePlayer = const TextStyle(
       color: Colors.white,
       fontSize: 48,
       fontWeight: FontWeight.bold,
     );
     final tpPlayer = TextPainter(
-      text: TextSpan(text: '$playerPontuacao', style: textStylePlayer),
+      text: TextSpan(text: '$playerScore', style: textStylePlayer),
       textDirection: TextDirection.ltr,
-    );
-    tpPlayer.layout();
+    )..layout();
     tpPlayer.paint(canvas, Offset(size.width / 4 - tpPlayer.width / 2, 20));
 
-    final textStyleAI = TextStyle(
+    final textStyleAI = const TextStyle(
       color: Colors.black,
       fontSize: 48,
       fontWeight: FontWeight.bold,
     );
     final tpAI = TextPainter(
-      text: TextSpan(text: '$pontoIA', style: textStyleAI),
+      text: TextSpan(text: '$aiScore', style: textStyleAI),
       textDirection: TextDirection.ltr,
-    );
-    tpAI.layout();
+    )..layout();
     tpAI.paint(canvas, Offset(size.width * 3 / 4 - tpAI.width / 2, 20));
   }
 
@@ -394,7 +378,7 @@ class GameOverScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "FIM DE JOGO",
+              "GAME OVER",
               style: GoogleFonts.grenze(
                 color: Colors.white,
                 fontSize: 80,
@@ -413,14 +397,11 @@ class GameOverScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const TelaInicial(),
+                  onTap:
+                      () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const TelaInicial()),
                       ),
-                    );
-                  },
                   child: Image.asset(
                     'assets/imagens/retornar.png',
                     width: 70,
@@ -429,17 +410,12 @@ class GameOverScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 30),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Rank()),
-                    );
-                  },
-                  child: Image.asset(
-                    'assets/imagens/rank.png',
-                    width: 70,
-                    height: 70,
-                  ),
+                  onTap:
+                      () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const Rank()),
+                      ),
+                  child: Image.asset('assets/imagens/rank.png', height: 70),
                 ),
               ],
             ),

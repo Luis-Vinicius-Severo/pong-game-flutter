@@ -10,6 +10,8 @@ dependencies:
   google_fonts: ^6.1.0
   flutter:
     sdk: flutter
+  sqflite: ^2.3.2
+  path: ^1.9.0
 
   cupertino_icons: ^1.0.8
 

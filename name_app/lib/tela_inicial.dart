@@ -64,12 +64,11 @@ class TelaInicial extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const Rank()),
-                        );
-                      },
+                      onTap:
+                          () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => const Rank()),
+                          ),
                       child: Image.asset(
                         'assets/imagens/rank.png',
                         width: 150,
